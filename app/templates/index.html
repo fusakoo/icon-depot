@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename= 'css/style.css') }}">
     <title>Icon Depot</title>
 </head>
 <body>
-   <h2>Welcome to Icon Depot</h2>
+   <h1>Welcome to Icon Depot</h1>
    <p>Directories</p>
    <ul>
-       <li>/ : [GET] this page</li>
-       <li>/icons-available : [GET] get a list of icons that can be queries</li>
-       <li>/icon/&lt;icon_name&gt; : [GET] specify the name of icon and get a dict/json for the icon's html</li>
-       <li>/icons + JSON request : [POST] similar to /icon, but get html for multiple icons</li>
+       <li><span class="directory">/</span> : [GET] this page</li>
+       <li><span class="directory">/icons-available</span> : [GET] get a list of icons that can be queries</li>
+       <li><span class="directory">/icon/&lt;icon_name&gt;</span> : [GET] specify the name of icon and get a dict/json for the icon's html</li>
+       <li><span class="directory">/icons</span> + JSON request : [POST] similar to /icon, but get html for multiple icons</li>
    </ul>
 </body>
 </html>
