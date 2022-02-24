@@ -1,3 +1,6 @@
 # Ignore all environment files/directories
 venv
 .flaskenv
+
+# Avoid importing some static files
+app/static/icon_list.json

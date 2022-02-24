@@ -2,9 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ColorThemeGenerator</title>
+    <title>Icon Depot</title>
 </head>
 <body>
-   <p>Welcome to Color Theme Generator Endpoint</p>
+   <h2>Welcome to Icon Depot</h2>
+   <p>Directories</p>
+   <ul>
+       <li>/ : [GET] this page</li>
+       <li>/icons-available : [GET] get a list of icons that can be queries</li>
+       <li>/icon/&lt;icon_name&gt; : [GET] specify the name of icon and get a dict/json for the icon's html</li>
+       <li>/icons + JSON request : [POST] similar to /icon, but get html for multiple icons</li>
+   </ul>
 </body>
 </html>
