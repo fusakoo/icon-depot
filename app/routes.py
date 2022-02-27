@@ -12,9 +12,9 @@ def index():
     return render_template('index.html')
 
 @app.route('/icons-available')
-def get_icon_available():
+def get_icons_available():
     '''
-    Get a list of icons available by checking the materials icon metadata
+    Return a list of icons available by checking the materials icon metadata
     '''
     r = requests.get('https://fonts.google.com/metadata/icons')
     rtext = r.text[5:]
@@ -28,17 +28,52 @@ def get_icon_available():
         for icon in icons:
             entry = {
                 'name' : icon['name'],
+                'tags' : icon['tags'],
                 'categories' : icon['categories']
             }
             icon_dict['icons'].append(entry)
     response = flask.jsonify(icon_dict)
     return response
 
+@app.route('/categories-available')
+def get_categories():
+    '''
+    Return a list of categories available by checking the metadata
+    '''
+    icon_dict = json.loads(get_icons_available().get_data())
+    icons = icon_dict['icons']
+    output = []
+    for icon in icons:
+        categories = icon['categories']
+        for category in categories:
+            if category not in output:
+                output.append(category)
+    print(output)
+    response = flask.jsonify(output)
+    return response
+
+@app.route('/tags-available')
+def get_tags():
+    '''
+    Return a list of categories available by checking the metadata
+    '''
+    icon_dict = json.loads(get_icons_available().get_data())
+    icons = icon_dict['icons']
+    output = []
+    for icon in icons:
+        tags = icon['tags']
+        for tag in tags:
+            if tag not in output:
+                output.append(tag)
+    print(output)
+    response = flask.jsonify(output)
+    return response
+
 def check_if_available(icon_name):
     '''
     Checks if the name exists in the available list of icons
     '''
-    icon_dict = json.loads(get_icon_available().get_data())
+    icon_dict = json.loads(get_icons_available().get_data())
     icons = icon_dict['icons']
     for icon in icons:
         name = icon.get('name')
