@@ -35,6 +35,7 @@ def get_icon_available():
             icon_dict['icons'].append(entry)
     response = flask.jsonify(icon_dict)
     response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET"
     return response
 
 def check_if_available(icon_name):
@@ -60,6 +61,7 @@ def get_icon(icon_name):
         }
         response = flask.jsonify(output)
         response.headers["Access-Control-Allow-Origin"] = "*"
+        response.headers["Access-Control-Allow-Methods"] = "GET"
         return response
 
 @app.route('/icons', methods=['POST'])
@@ -79,4 +81,5 @@ def icons_json():
             output['html'].append(icon_html)
     response = flask.jsonify(output)
     response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "POST"
     return response
