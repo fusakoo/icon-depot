@@ -1,3 +1,4 @@
+import flask
 from app import app
 from flask import render_template, request
 import requests
@@ -15,6 +16,9 @@ def get_icon_available():
     '''
     Get a list of icons available by checking the materials icon metadata
     '''
+    response = flask.Response()
+    response.headers["Access-Control-Allow-Origin"] = "*"
+
     r = requests.get('https://fonts.google.com/metadata/icons')
     rtext = r.text[5:]
     with open('app/static/icon_list.json', 'w') as json_file:
@@ -49,6 +53,9 @@ def get_icon(icon_name):
     '''
     Checks available icons & returns a dict containing an html for the icon
     '''
+    response = flask.Response()
+    response.headers["Access-Control-Allow-Origin"] = "*"
+
     if check_if_available(icon_name):
         output = {
             'html' : '<span class=\"material-icons\">{}</span>'.format(icon_name)
@@ -60,6 +67,9 @@ def icons_json():
     '''
     Checks available icons & returns a dict containing list of html for the icons
     '''
+    response = flask.Response()
+    response.headers["Access-Control-Allow-Origin"] = "*"
+
     request_data = request.get_json()
     icon_names = request_data['icon_list']
     output = { 'html': [] }
