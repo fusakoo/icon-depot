@@ -9,12 +9,20 @@
    <h1>Welcome to Icon Depot</h1>
    <p>Directories</p>
    <ul>
-       <li><span class="directory">/</span> : [GET] this page</li>
-       <li><span class="directory">/icons-available</span> : [GET] get a list of icons that can be queried</li>
-       <li><span class="directory">/categories-available</span> : [GET] get a list of categories that can be queried</li>
-       <li><span class="directory">/tags-available</span> : [GET] get a list of tags that can be queried</li>
-       <li><span class="directory">/icon/&lt;icon_name&gt;</span> : [GET] specify the name of icon and get a dict/json for the icon's html</li>
-       <li><span class="directory">/icons</span> + JSON request : [POST] similar to /icon, but get html for multiple icons</li>
+       <li><span class="directory">/</span> : this page</li>
+       <li>[GET]
+           <ul>
+               <li><span class="directory">/icons-available</span> : get a list of icons that can be queried</li>
+               <li><span class="directory">/categories-available</span> : get a list of categories that can be queried</li>
+               <li><span class="directory">/tags-available</span> : get a list of tags that can be queried</li>
+               <li><span class="directory">/icon/&lt;icon_name&gt;</span> : specify the name of icon and get a dict/json for the icon's html</li>
+           </ul>
+       </li>
+       <li>[POST]
+           <ul>
+               <li><span class="directory">/icons</span> + JSON request : similar to /icon, but get html for multiple icons</li>
+           </ul>
+       </li>
    </ul>
 </body>
 </html>
