@@ -9,6 +9,8 @@ def index():
     '''
     Index page
     '''
+    response = flask.Response()
+    response.headers["Access-Control-Allow-Origin"] = "*"
     return render_template('index.html')
 
 @app.route('/icons-available')
@@ -16,9 +18,6 @@ def get_icon_available():
     '''
     Get a list of icons available by checking the materials icon metadata
     '''
-    response = flask.Response()
-    response.headers["Access-Control-Allow-Origin"] = "*"
-
     r = requests.get('https://fonts.google.com/metadata/icons')
     rtext = r.text[5:]
     with open('app/static/icon_list.json', 'w') as json_file:
@@ -34,13 +33,15 @@ def get_icon_available():
                 'categories' : icon['categories']
             }
             icon_dict['icons'].append(entry)
-    return icon_dict
+    response = flask.jsonify(icon_dict)
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    return response
 
 def check_if_available(icon_name):
     '''
     Checks if the name exists in the available list of icons
     '''
-    icon_dict = get_icon_available()
+    icon_dict = json.loads(get_icon_available().get_data())
     icons = icon_dict['icons']
     for icon in icons:
         name = icon.get('name')
@@ -53,14 +54,13 @@ def get_icon(icon_name):
     '''
     Checks available icons & returns a dict containing an html for the icon
     '''
-    response = flask.Response()
-    response.headers["Access-Control-Allow-Origin"] = "*"
-
     if check_if_available(icon_name):
         output = {
             'html' : '<span class=\"material-icons\">{}</span>'.format(icon_name)
         }
-        return output
+        response = flask.jsonify(output)
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        return response
 
 @app.route('/icons', methods=['POST'])
 def icons_json():
@@ -77,4 +77,6 @@ def icons_json():
         if check_if_available(icon_name):
             icon_html = '<span class=\"material-icons\">{}</span>'.format(icon_name)
             output['html'].append(icon_html)
-    return output
+    response = flask.jsonify(output)
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    return response
