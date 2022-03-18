@@ -110,3 +110,21 @@ def icons_json():
             output['html'].append(icon_html)
     response = flask.jsonify(output)
     return response
+
+@app.route('/icons-value', methods=['POST'])
+def icons_values_json():
+    '''
+    Checks available icons & returns a dict containing list of html for the icons
+    '''
+    response = flask.Response()
+    response.headers["Access-Control-Allow-Origin"] = "*"
+
+    request_data = request.get_json()
+    icon_names = request_data['icon_list']
+    output = { 'html': [] }
+    for icon_name in icon_names:
+        if check_if_available(icon_name):
+            icon_html = '<span class="material-icons" value="{}">{}</span>'.format(icon_name, icon_name)
+            output['html'].append(icon_html)
+    response = flask.jsonify(output)
+    return response

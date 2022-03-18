@@ -21,8 +21,16 @@
        <li>[POST]
            <ul>
                <li><span class="directory">/icons</span> + JSON request : similar to /icon, but get html for multiple icons</li>
-           </ul>
+               <li><span class="directory">/icons-value</span> + JSON request : similar to /icons, but with value field added with same name of icon</li>
+            </ul>
        </li>
    </ul>
+   <p>
+       The JSON file for the POST request should look like the following:<br/>
+       {<br/>
+           "icon_list": []<br/>
+       }<br/>
+       Where [] is an array filled with icon names as strings (e.g., "face", "pets")<br/>
+   </p>
 </body>
 </html>
